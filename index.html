@@ -3,188 +3,1588 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bitacora Leon Camila</title>
 
-    <link rel="icon" type="image/x-icon" href="https://play-lh.googleusercontent.com/DpEIcJPiSQJb22lYSAnerRC5IlDt94itECqtlqhh97vKziX6LV8pyScGBCWiRfKCSMM">
+    <title>Guardián IRTRA | Sentinel Systems</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
 
     <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #fafafa;
-        }
-        body {
-            display: flex;
-            flex-direction: column;
-            text-align: center;
-        }
-        header {
-            padding: 20px;
-            background-color: rgb(135, 171, 222);
-            color: white;
-        }
-       
-        h1 {
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-            margin: 0;
+
+        :root {
+            --bg: #f7f7f3;
+            --surface: #ffffff;
+            --soft: #eceee8;
+            --text: #20221f;
+            --muted: #757971;
+            --accent: #7c8977;
+            --border: rgba(0,0,0,0.10);
+            --shadow: 0 20px 60px rgba(0,0,0,0.08);
         }
 
-        main {
-            flex: 1;
-            padding: 20px;
-            max-width: 800px;
-            margin: 0 auto;
-            width: 100%;
+        body.dark {
+            --bg: #151714;
+            --surface: #1e211d;
+            --soft: #242821;
+            --text: #f2f3ef;
+            --muted: #acb0a8;
+            --accent: #a1ae9b;
+            --border: rgba(255,255,255,0.10);
+            --shadow: 0 20px 60px rgba(0,0,0,0.30);
+        }
+
+        * {
             box-sizing: border-box;
         }
 
-        .logo-colegio {
-            transition: transform 0.3s ease;
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: "DM Sans", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            transition: 0.3s;
+        }
+
+
+        /* =========================
+           LOBBY
+        ========================= */
+
+        .lobby {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 30px;
+
+            background:
+                radial-gradient(circle at 20% 20%, rgba(124,137,119,.14), transparent 30%),
+                radial-gradient(circle at 80% 80%, rgba(124,137,119,.10), transparent 35%),
+                var(--bg);
+
+            transition: opacity .7s ease;
+        }
+
+        .lobby-content {
+            max-width: 850px;
+            width: 100%;
+            text-align: center;
+
+            animation: lobbyAppear 1s ease;
+        }
+
+        @keyframes lobbyAppear {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            width: 230px;
+            max-width: 70%;
+            margin-bottom: 25px;
+            border-radius: 12px;
+        }
+
+        .small-title {
+            margin-bottom: 18px;
+
+            color: var(--accent);
+
+            font-size: 12px;
+            font-weight: 700;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+        }
+
+        .lobby h1 {
+            margin: 10px 0 20px;
+
+            font-family: "Playfair Display", serif;
+
+            font-size: clamp(58px, 9vw, 105px);
+
+            font-weight: 500;
+
+            letter-spacing: -4px;
+        }
+
+        .subtitle {
+            max-width: 720px;
+
+            margin: 0 auto;
+
+            color: var(--muted);
+
+            font-size: 18px;
+
+            line-height: 1.7;
+        }
+
+        #enterBtn {
+            margin-top: 35px;
+
+            padding: 16px 28px;
+
+            border: none;
+            border-radius: 40px;
+
+            background: var(--text);
+            color: var(--bg);
+
+            font-weight: 600;
+
             cursor: pointer;
-            width: 100px;
-        }
-        .logo-colegio:hover {
-            transform: scale(1.1);
-        }
-        .logo-colegio:active {
-            transform: scale(2.5);
+
+            transition: .3s;
         }
 
-        .semana {
-            background-color: rgb(135, 176, 222);
-            border-radius: 15px;
-            padding: 25px;
-            margin: 20px 0;
-            border: 1px solid #79a6d2;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            text-align: left;
-            color: white;
-        }
-        .semana:hover {
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        #enterBtn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
         }
 
-        .visor-pdf {
-            width: 100%;
-            height: 500px;
-            border: 2px solid white;
-            background-color: white;
-            border-radius: 10px;
-            margin-top: 15px;
+        .team-info {
+            margin-top: 45px;
+            padding-top: 22px;
+
+            border-top: 1px solid var(--border);
         }
 
-        .visor-video {
-            width: 100%;
-            max-height: 500px;
-            border-radius: 10px;
-            margin-top: 15px;
-            border: 2px solid white;
-            background-color: black;
+        .team-info p {
+            margin: 0 0 8px;
+
+            font-weight: 600;
         }
 
-        .boton-descarga {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 10px 20px;
-            background-color: white;
-            color: burlywood;
+        .team-info span {
+            color: var(--muted);
+
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           NAV
+        ========================= */
+
+        header {
+            position: sticky;
+            top: 0;
+
+            z-index: 1000;
+
+            border-bottom: 1px solid var(--border);
+
+            background: rgba(247,247,243,.84);
+
+            backdrop-filter: blur(18px);
+        }
+
+        body.dark header {
+            background: rgba(21,23,20,.86);
+        }
+
+        nav {
+            max-width: 1200px;
+            height: 76px;
+
+            margin: auto;
+
+            padding: 0 25px;
+
+            display: flex;
+            align-items: center;
+        }
+
+        .brand {
+            margin-right: auto;
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 21px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            position: relative;
+
+            color: var(--muted);
+
             text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: background 0.3s;
+
+            font-size: 14px;
+
+            transition: .3s;
         }
-        .boton-descarga:hover {
-            background-color: #f5f5f5;
+
+        .nav-links a:hover {
+            color: var(--text);
         }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+
+            margin-left: 30px;
+        }
+
+        .nav-buttons button {
+            width: 42px;
+            height: 42px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 50%;
+
+            background: transparent;
+
+            color: var(--text);
+
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            max-width: 1200px;
+            min-height: 90vh;
+
+            margin: auto;
+
+            padding: 110px 25px;
+
+            display: grid;
+
+            grid-template-columns: 1.2fr .8fr;
+
+            gap: 80px;
+
+            align-items: center;
+        }
+
+        .hero h2 {
+            margin: 20px 0;
+
+            font-family: "Playfair Display", serif;
+
+            font-size: clamp(52px, 7vw, 82px);
+
+            font-weight: 500;
+
+            line-height: 0.98;
+
+            letter-spacing: -3px;
+        }
+
+        .hero-text > p {
+            max-width: 650px;
+
+            color: var(--muted);
+
+            line-height: 1.8;
+        }
+
+        .main-btn {
+            display: inline-block;
+
+            margin-top: 20px;
+
+            padding: 15px 26px;
+
+            border-radius: 40px;
+
+            background: var(--text);
+            color: var(--bg);
+
+            text-decoration: none;
+
+            font-weight: 600;
+
+            transition: .3s;
+        }
+
+        .main-btn:hover {
+            transform: translateY(-3px);
+        }
+
+
+        /* SYSTEM CARD */
+
+        .system-card {
+            padding: 30px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 30px;
+
+            background: var(--surface);
+
+            box-shadow: var(--shadow);
+        }
+
+        .status {
+            color: var(--muted);
+
+            font-size: 14px;
+        }
+
+        .sensor {
+            height: 320px;
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+        }
+
+        .circle {
+            width: 115px;
+            height: 115px;
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            border-radius: 50%;
+
+            background: var(--text);
+            color: var(--bg);
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 42px;
+
+            box-shadow:
+                0 0 0 40px rgba(124,137,119,.08),
+                0 0 0 80px rgba(124,137,119,.04);
+
+            animation: pulse 3s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .system-data {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 10px;
+        }
+
+        .system-data div {
+            padding: 15px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 15px;
+        }
+
+        .system-data span {
+            display: block;
+
+            margin-bottom: 4px;
+
+            color: var(--muted);
+
+            font-size: 12px;
+        }
+
+
+        /* =========================
+           SECCIONES
+        ========================= */
+
+        .section {
+            max-width: 1200px;
+
+            margin: auto;
+
+            padding: 120px 25px;
+        }
+
+        .section-title {
+            margin: 15px 0;
+
+            font-family: "Playfair Display", serif;
+
+            font-size: clamp(48px, 6vw, 70px);
+
+            font-weight: 500;
+
+            letter-spacing: -2px;
+        }
+
+        .section-description {
+            max-width: 720px;
+
+            color: var(--muted);
+
+            line-height: 1.8;
+        }
+
+
+        /* CARDS */
+
+        .cards {
+            margin-top: 60px;
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+        .card {
+            min-height: 270px;
+
+            padding: 30px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 25px;
+
+            background: var(--surface);
+
+            transition: .3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+
+            box-shadow: var(--shadow);
+        }
+
+        .card span {
+            color: var(--accent);
+
+            font-size: 12px;
+        }
+
+        .card h3 {
+            margin-top: 70px;
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 29px;
+
+            font-weight: 500;
+        }
+
+        .card p {
+            color: var(--muted);
+
+            line-height: 1.7;
+        }
+
+
+        /* =========================
+           CONTENIDO
+        ========================= */
+
+        .content-background {
+            background: var(--soft);
+        }
+
+        .project-grid {
+            margin-top: 60px;
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 20px;
+        }
+
+        .project-card {
+            padding: 30px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 28px;
+
+            background: var(--surface);
+
+            transition: .3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+
+            box-shadow: var(--shadow);
+        }
+
+        .number {
+            color: var(--accent) !important;
+
+            font-size: 12px !important;
+
+            letter-spacing: 2px;
+        }
+
+        .placeholder {
+            height: 300px;
+
+            margin: 20px 0;
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            border-radius: 18px;
+
+            background: var(--soft);
+
+            color: var(--muted);
+
+            text-align: center;
+        }
+
+        .document-icon {
+            margin: 25px 0;
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 90px;
+
+            color: var(--soft);
+        }
+
+        .project-card h3 {
+            margin-bottom: 10px;
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 31px;
+
+            font-weight: 500;
+        }
+
+        .project-card p {
+            color: var(--muted);
+
+            line-height: 1.7;
+        }
+
+        .project-card a {
+            color: var(--text);
+
+            text-decoration: none;
+
+            font-weight: 700;
+        }
+
+        .project-card audio {
+            width: 100%;
+
+            margin-top: 20px;
+        }
+
+        .video-card {
+            grid-column: 1 / 3;
+        }
+
+        .video-card video {
+            width: 100%;
+
+            margin-top: 20px;
+
+            border-radius: 18px;
+
+            background: black;
+        }
+
+
+        /* =========================
+           EQUIPO
+        ========================= */
+
+        .team-cards {
+            margin-top: 60px;
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+        .team-card {
+            padding: 35px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 25px;
+
+            background: var(--surface);
+
+            text-align: center;
+        }
+
+        .initials {
+            width: 80px;
+            height: 80px;
+
+            margin: auto;
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            border: 1px solid var(--border);
+
+            border-radius: 50%;
+
+            color: var(--accent);
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 20px;
+        }
+
+        .team-card h3 {
+            font-family: "Playfair Display", serif;
+
+            font-size: 26px;
+
+            font-weight: 500;
+        }
+
+        .team-card p {
+            color: var(--muted);
+        }
+
+        .school-info {
+            margin-top: 40px;
+
+            color: var(--muted);
+
+            text-align: center;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
 
         footer {
+            padding: 45px 8%;
+
             display: flex;
+
             justify-content: space-between;
+
             align-items: center;
-            padding: 15px 50px;
-            border-top: 1px solid rgb(147, 182, 230);
-            background-color: rgb(135, 173, 222);
-            color: white;
+
+            gap: 30px;
+
+            border-top: 1px solid var(--border);
         }
+
+        footer h3 {
+            margin: 0;
+
+            font-family: "Playfair Display", serif;
+        }
+
+        footer p {
+            color: var(--muted);
+        }
+
+
+        /* =========================
+           REVEAL
+        ========================= */
+
+        .reveal {
+            opacity: 0;
+
+            transform: translateY(25px);
+
+            transition:
+                opacity .7s ease,
+                transform .7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+
+            transform: translateY(0);
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 850px) {
+
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .video-card {
+                grid-column: auto;
+            }
+
+            .team-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            footer {
+                flex-direction: column;
+
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 550px) {
+
+            .lobby h1 {
+                letter-spacing: -2px;
+            }
+
+            .hero {
+                padding-top: 80px;
+            }
+
+            .system-data {
+                grid-template-columns: 1fr;
+            }
+
+            .sensor {
+                height: 250px;
+            }
+
+            .circle {
+                width: 90px;
+                height: 90px;
+
+                box-shadow:
+                    0 0 0 30px rgba(124,137,119,.08),
+                    0 0 0 60px rgba(124,137,119,.04);
+            }
+        }
+
     </style>
 </head>
+
+
 <body>
 
+
+    <!-- =========================
+         LOBBY
+    ========================= -->
+
+    <section class="lobby" id="lobby">
+
+        <div class="lobby-content">
+
+            <img
+                src="logo-sentinel.jpg"
+                alt="Logo Sentinel Systems"
+                class="logo"
+            >
+
+            <p class="small-title">
+                Sentinel Systems · Proyecto Final TIC 2026
+            </p>
+
+            <h1>
+                Guardián IRTRA
+            </h1>
+
+            <p class="subtitle">
+
+                Sistema de Detección y Alerta Perimetral Automatizada
+                para Zonas Restringidas de Mantenimiento
+
+            </p>
+
+            <button id="enterBtn">
+
+                Explorar proyecto →
+
+            </button>
+
+
+            <div class="team-info">
+
+                <p>
+                    Camila León · Isabella Liuti · Abigail Asmus
+                </p>
+
+                <span>
+                    11mo E · Colegio Capouilliez · Profesor Eswin Godoy
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         NAVEGACIÓN
+    ========================= -->
+
     <header>
-        <h1>Bitacora Segunda y Tercera Unidad</h1>
+
+        <nav>
+
+            <div class="brand">
+                Sentinel Systems
+            </div>
+
+
+            <div class="nav-links">
+
+                <a href="#inicio">
+                    Inicio
+                </a>
+
+                <a href="#proyecto">
+                    Proyecto
+                </a>
+
+                <a href="#contenido">
+                    Contenido
+                </a>
+
+                <a href="#equipo">
+                    Equipo
+                </a>
+
+            </div>
+
+
+            <div class="nav-buttons">
+
+                <button id="themeBtn" title="Modo claro/oscuro">
+                    ☾
+                </button>
+
+                <button id="musicBtn" title="Música">
+                    ♪
+                </button>
+
+            </div>
+
+        </nav>
+
     </header>
 
+
     <main>
-        <div class="semana">
-            <h3>Semana 1: Introducción Arduino</h3>
-            <iframe src="recursos/Introducción Arduino. (1).pdf" class="visor-pdf"></iframe>
-            <br>
-            <a href="recursos/Introducción Arduino. (1).pdf" download class="boton-descarga">Descargar PDF</a>
+
+
+        <!-- =========================
+             HERO
+        ========================= -->
+
+        <section class="hero" id="inicio">
+
+            <div class="hero-text reveal">
+
+                <p class="small-title">
+                    Tecnología aplicada a la seguridad
+                </p>
+
+                <h2>
+                    Protección inteligente para áreas restringidas.
+                </h2>
+
+                <p>
+
+                    Guardián IRTRA es una propuesta tecnológica
+                    desarrollada por Sentinel Systems para detectar
+                    presencia en zonas restringidas de mantenimiento
+                    y generar alertas automáticas ante posibles ingresos
+                    no autorizados.
+
+                </p>
+
+                <a href="#proyecto" class="main-btn">
+
+                    Conocer el proyecto
+
+                </a>
+
+            </div>
+
+
+            <div class="system-card reveal">
+
+                <p class="status">
+                    ● Sistema activo
+                </p>
+
+                <div class="sensor">
+
+                    <div class="circle">
+                        S
+                    </div>
+
+                </div>
+
+
+                <div class="system-data">
+
+                    <div>
+
+                        <span>
+                            Detección
+                        </span>
+
+                        <strong>
+                            Automática
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Respuesta
+                        </span>
+
+                        <strong>
+                            Inmediata
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             PROYECTO
+        ========================= -->
+
+        <section class="section" id="proyecto">
+
+            <div class="reveal">
+
+                <p class="small-title">
+                    Sobre Guardián IRTRA
+                </p>
+
+                <h2 class="section-title">
+
+                    Detectar. Alertar. Proteger.
+
+                </h2>
+
+                <p class="section-description">
+
+                    Guardián IRTRA es un sistema de detección
+                    y alerta perimetral automatizada diseñado
+                    para apoyar la seguridad en zonas de mantenimiento
+                    de acceso restringido.
+
+                    Mediante sensores y componentes electrónicos,
+                    el sistema identifica movimiento y activa
+                    respuestas de alerta para advertir la presencia
+                    de una persona dentro del área supervisada.
+
+                </p>
+
+            </div>
+
+
+            <div class="cards">
+
+                <div class="card reveal">
+
+                    <span>
+                        01
+                    </span>
+
+                    <h3>
+                        Detección
+                    </h3>
+
+                    <p>
+
+                        El sensor PIR identifica movimiento
+                        dentro del área de seguridad establecida.
+
+                    </p>
+
+                </div>
+
+
+                <div class="card reveal">
+
+                    <span>
+                        02
+                    </span>
+
+                    <h3>
+                        Procesamiento
+                    </h3>
+
+                    <p>
+
+                        Arduino recibe la información del sensor
+                        y determina el estado correspondiente del sistema.
+
+                    </p>
+
+                </div>
+
+
+                <div class="card reveal">
+
+                    <span>
+                        03
+                    </span>
+
+                    <h3>
+                        Alerta
+                    </h3>
+
+                    <p>
+
+                        Cuando existe detección, el sistema puede
+                        activar una alarma sonora y una señal visual
+                        para advertir del ingreso.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             CONTENIDO
+        ========================= -->
+
+        <div class="content-background">
+
+            <section class="section" id="contenido">
+
+                <div class="reveal">
+
+                    <p class="small-title">
+                        Documentación del proyecto
+                    </p>
+
+                    <h2 class="section-title">
+
+                        Nuestro proceso y resultados.
+
+                    </h2>
+
+                    <p class="section-description">
+
+                        En esta sección se presentan las evidencias
+                        desarrolladas durante el proceso de creación
+                        e investigación de Guardián IRTRA.
+
+                    </p>
+
+                </div>
+
+
+                <div class="project-grid">
+
+
+                    <!-- TINKERCAD -->
+
+                    <div class="project-card reveal">
+
+                        <p class="number">
+                            01 · CIRCUITO
+                        </p>
+
+                        <div class="placeholder">
+
+                            Aquí colocarás la captura de tu circuito
+                            de Tinkercad
+
+                        </div>
+
+                        <h3>
+                            Circuito en Tinkercad
+                        </h3>
+
+                        <p>
+
+                            Diseño y simulación del circuito
+                            utilizado para el sistema Guardián IRTRA.
+
+                        </p>
+
+                    </div>
+
+
+                    <!-- INVESTIGACIÓN -->
+
+                    <div class="project-card reveal">
+
+                        <p class="number">
+                            02 · INVESTIGACIÓN
+                        </p>
+
+                        <div class="document-icon">
+                            PDF
+                        </div>
+
+                        <h3>
+                            Investigación formal
+                        </h3>
+
+                        <p>
+
+                            Documento de investigación que presenta
+                            los fundamentos, propósito y desarrollo
+                            tecnológico del proyecto.
+
+                        </p>
+
+                        <a href="investigacion.pdf" target="_blank">
+
+                            Abrir investigación →
+
+                        </a>
+
+                    </div>
+
+
+                    <!-- INFOGRAFÍA -->
+
+                    <div class="project-card reveal">
+
+                        <p class="number">
+                            03 · INFOGRAFÍA
+                        </p>
+
+                        <div class="document-icon">
+                            INFO
+                        </div>
+
+                        <h3>
+                            Infografía
+                        </h3>
+
+                        <p>
+
+                            Representación visual de los principales
+                            elementos y características
+                            de Guardián IRTRA.
+
+                        </p>
+
+                        <a href="infografia.pdf" target="_blank">
+
+                            Ver infografía →
+
+                        </a>
+
+                    </div>
+
+
+                    <!-- PODCAST -->
+
+                    <div class="project-card reveal">
+
+                        <p class="number">
+                            04 · PODCAST
+                        </p>
+
+                        <h3>
+                            Podcast
+                        </h3>
+
+                        <p>
+
+                            Presentación en formato de audio sobre
+                            el desarrollo, propósito y funcionamiento
+                            del proyecto.
+
+                        </p>
+
+                        <audio controls>
+
+                            <source
+                                src="podcast.mp3"
+                                type="audio/mpeg"
+                            >
+
+                        </audio>
+
+                    </div>
+
+
+                    <!-- VIDEO -->
+
+                    <div class="project-card video-card reveal">
+
+                        <p class="number">
+                            05 · FUNCIONAMIENTO
+                        </p>
+
+                        <h3>
+                            Guardián IRTRA en acción
+                        </h3>
+
+                        <p>
+
+                            Demostración del circuito físico
+                            y de la respuesta del sistema
+                            al detectar movimiento.
+
+                        </p>
+
+                        <video controls>
+
+                            <source
+                                src="circuito.mp4"
+                                type="video/mp4"
+                            >
+
+                        </video>
+
+                    </div>
+
+                </div>
+
+            </section>
+
         </div>
-     </div>
-    <div class="semana">
-    <h2>Video y Captura de arduino</h2>
-    <div class="pdf-container vacio">
-       
-        <div class="semana 2">
-            <div class="semana">
 
-    <h2>Semana 2</h2>
 
-    <img src="recursos/img/Arduino1.JPG" width="100%" alt="Captura de la actividad">
+        <!-- =========================
+             EQUIPO
+        ========================= -->
 
-</div>
+        <section class="section" id="equipo">
 
-    <h2>Semana 3</h2>
+            <div class="reveal">
 
-    <video controls width="100%">
-        <source src="recursos/8mb.video-stV-K6IEg3tZ.mp4">
-    </video>
-    </div>
-        <p></p>
-    </div>
-    </div>
-        <div class="semana">
-   
-    <h2>Semana 5 Arduino 1</h2>
+                <p class="small-title">
+                    Sentinel Systems
+                </p>
 
-    <video controls width="100%">
-        <source src="recursos/Video1Cams.mp4">
-    </video>
-</div>
-        <div class="semana">
+                <h2 class="section-title">
+                    Nuestro equipo.
+                </h2>
 
-    <h2>Semana 5 Arduino 2</h2>
+            </div>
 
-    <video controls width="100%">
-        <source src="recursos/VideoCams.mp4">
-    </video>
-</div>
-        <div class="semana">
 
-    <h2>Semana 6</h2>
+            <div class="team-cards">
 
-    <video controls width="100%">
-        <source src="recursos/Circuito video.mp4">
-    </video>
+                <div class="team-card reveal">
 
-</div>
-        <div class="semana">
+                    <div class="initials">
+                        CL
+                    </div>
 
-    <h2>Semana 7</h2>
+                    <h3>
+                        Camila León
+                    </h3>
 
-    <video controls width="100%">
-        <source src="recursos/Grabación 2026-07-24 210150.mp4">
-    </video>
+                    <p>
+                        11mo E
+                    </p>
 
-</div>
-    </main> 
+                </div>
+
+
+                <div class="team-card reveal">
+
+                    <div class="initials">
+                        IL
+                    </div>
+
+                    <h3>
+                        Isabella Liuti
+                    </h3>
+
+                    <p>
+                        11mo E
+                    </p>
+
+                </div>
+
+
+                <div class="team-card reveal">
+
+                    <div class="initials">
+                        AA
+                    </div>
+
+                    <h3>
+                        Abigail Asmus
+                    </h3>
+
+                    <p>
+                        11mo E
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <p class="school-info reveal">
+
+                Colegio Capouilliez · Profesor Eswin Godoy
+                · Proyecto Final TIC · 2026
+
+            </p>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
     <footer>
-        <span>@Leonncamila</span>
-        <img src="https://www.capouilliez.edu.gt/assets/img/logo.png" height="25" width="100" alt="Logo Colegio" class="logo-colegio">
+
+        <div>
+
+            <h3>
+                Sentinel Systems
+            </h3>
+
+            <p>
+                Detectar. Alertar. Proteger.
+            </p>
+
+        </div>
+
+        <p>
+            Guardián IRTRA · 2026
+        </p>
+
     </footer>
+
+
+    <!-- =========================
+         MÚSICA
+    ========================= -->
+
+    <audio id="backgroundMusic" loop>
+
+        <source
+            src="musica.mp3"
+            type="audio/mpeg"
+        >
+
+    </audio>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+        const lobby =
+            document.getElementById("lobby");
+
+        const enterBtn =
+            document.getElementById("enterBtn");
+
+        const themeBtn =
+            document.getElementById("themeBtn");
+
+        const musicBtn =
+            document.getElementById("musicBtn");
+
+        const music =
+            document.getElementById("backgroundMusic");
+
+
+        /* ========================
+           LOBBY
+        ======================== */
+
+        enterBtn.addEventListener("click", () => {
+
+            lobby.style.opacity = "0";
+
+            setTimeout(() => {
+
+                lobby.style.display = "none";
+
+            }, 700);
+
+
+            music.volume = 0.20;
+
+
+            music.play()
+                .then(() => {
+
+                    musicBtn.textContent = "Ⅱ";
+
+                })
+                .catch(() => {
+
+                    musicBtn.textContent = "♪";
+
+                });
+
+        });
+
+
+        /* ========================
+           MODO OSCURO
+        ======================== */
+
+        themeBtn.addEventListener("click", () => {
+
+            document.body.classList.toggle("dark");
+
+
+            if (
+                document.body.classList.contains("dark")
+            ) {
+
+                themeBtn.textContent = "☀";
+
+            } else {
+
+                themeBtn.textContent = "☾";
+
+            }
+
+        });
+
+
+        /* ========================
+           MÚSICA
+        ======================== */
+
+        musicBtn.addEventListener("click", () => {
+
+            if (music.paused) {
+
+                music.play();
+
+                musicBtn.textContent = "Ⅱ";
+
+            } else {
+
+                music.pause();
+
+                musicBtn.textContent = "♪";
+
+            }
+
+        });
+
+
+        /* ========================
+           ANIMACIÓN AL SCROLL
+        ======================== */
+
+        const revealElements =
+            document.querySelectorAll(".reveal");
+
+
+        const observer =
+            new IntersectionObserver(
+
+                entries => {
+
+                    entries.forEach(entry => {
+
+                        if (entry.isIntersecting) {
+
+                            entry.target
+                                .classList
+                                .add("visible");
+
+                        }
+
+                    });
+
+                },
+
+                {
+                    threshold: 0.15
+                }
+
+            );
+
+
+        revealElements.forEach(element => {
+
+            observer.observe(element);
+
+        });
+
+    </script>
+
 
 </body>
 </html>
